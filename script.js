@@ -19,7 +19,7 @@ const decos = [
 	"*",
 	"*",
 	"*"
-]
+] // Liste des décos à afficher (18 étoiles pour 10 % de déco)
 
 const max = 20
 const min = 1
@@ -132,4 +132,4 @@ const afficherSapin = (etages, hauteur_etage) => {
 	}
 }
 
-afficherSapin(5, 5);
+afficherSapin(50, 20);
