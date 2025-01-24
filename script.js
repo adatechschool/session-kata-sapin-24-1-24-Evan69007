@@ -59,8 +59,18 @@ const afficherTriangleGauche = (n) => {
 const afficherPointeSapin = (n, espacement) => {
 	console.log(' '.repeat(espacement + 3) + '+');
     for (let i = 0; i < n; i++) {
-        console.log(" ".repeat(espacement - i + 2) + "/" + "*".repeat(i) + '|' + '*'.repeat(i) + "\\");
-    }
+		let decoString = ""
+		for (let k = 0; k < i; k++)
+		{
+			decoString += decos[Math.floor(Math.random() * (max - min) + min)]
+		}
+		decoString += '|'
+		for (let j = 0; j < i; j++)
+		{
+			decoString += decos[Math.floor(Math.random() * (max - min) + min)]
+		}
+		console.log(' '.repeat(espacement - i + 2) + '/' + decoString + "\\");
+	}
 }
 
 const afficherEtage = (hauteur, pointe_offset, espacement) => {
@@ -82,8 +92,18 @@ const afficherEtage = (hauteur, pointe_offset, espacement) => {
 const afficherPointeSapinPlusQuatreEtages = (n, espacement, etages) => {
 	console.log(' '.repeat(espacement + 3 + (etages - 4)) + '+');
     for (let i = 0; i < n; i++) {
-        console.log(" ".repeat(espacement - i + 2 + (etages - 4)) + "/" + "*".repeat(i) + '|' + '*'.repeat(i) + "\\");
-    }
+		let decoString = ""
+		for (let k = 0; k < i; k++)
+		{
+			decoString += decos[Math.floor(Math.random() * (max - min) + min)]
+		}
+		decoString += '|'
+		for (let j = 0; j < i; j++)
+		{
+			decoString += decos[Math.floor(Math.random() * (max - min) + min)]
+		}
+		console.log(' '.repeat(espacement - i + 2 + (etages - 4)) + '/' + decoString + "\\");
+	}
 }
 
 const afficherPlusDeQuatreEtage = (hauteur, pointe_offset, espacement, etages) => {
