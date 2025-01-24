@@ -1,3 +1,29 @@
+const decos = [
+	"*",
+	"+",
+	"*",
+	"o",
+	"*",
+	"*",
+	"*",
+	"*",
+	"*",
+	"*",
+	"*",
+	"*",
+	"*",
+	"*",
+	"*",
+	"*",
+	"*",
+	"*",
+	"*",
+	"*"
+]
+
+const max = 20
+const min = 1
+
 const afficherEtoile = (n) => {
 	console.log('*'.repeat(n));
 }
@@ -17,9 +43,7 @@ const afficherRectangle = (hauteur, largeur) => {
 // afficherRectangle(5, 5);
 
 const afficherTriangleDroite = (n) => {
-	for (let i = 0; i < n; i++) {
-		console.log('*'.repeat(i) + "\\");
-	}
+	console.log('*'.repeat(n) + "\\");
 }
 
 // afficherTriangleDroite(5);
@@ -38,11 +62,43 @@ const afficherPointeSapin = (n, espacement) => {
         console.log(" ".repeat(espacement - i + 2) + "/" + "*".repeat(i) + '|' + '*'.repeat(i) + "\\");
     }
 }
-// afficherPointeSapin(4); // Output:    +\n   /|\n  / |\\\n /  | \\\n/___|_\\
 
 const afficherEtage = (hauteur, pointe_offset, espacement) => {
 	for (let i = 0; i < hauteur; i++) {
-		console.log(' '.repeat(espacement - i + 2) + "/" + "*".repeat(pointe_offset + i) + "|" + "*".repeat(pointe_offset + i) + "\\"); 
+		let decoString = ""
+		for (let k = 0; k < pointe_offset + i; k++)
+		{
+			decoString += decos[Math.floor(Math.random() * (max - min) + min)]
+		}
+		decoString += '|'
+		for (let j = 0; j < pointe_offset + i; j++)
+		{
+			decoString += decos[Math.floor(Math.random() * (max - min) + min)]
+		}
+		console.log(' '.repeat(espacement - i + 2) + '/' + decoString + "\\");
+	}
+}
+
+const afficherPointeSapinPlusQuatreEtages = (n, espacement, etages) => {
+	console.log(' '.repeat(espacement + 3 + (etages - 4)) + '+');
+    for (let i = 0; i < n; i++) {
+        console.log(" ".repeat(espacement - i + 2 + (etages - 4)) + "/" + "*".repeat(i) + '|' + '*'.repeat(i) + "\\");
+    }
+}
+
+const afficherPlusDeQuatreEtage = (hauteur, pointe_offset, espacement, etages) => {
+	for (let i = 0; i < hauteur; i++) {
+		let decoString = ""
+		for (let k = 0; k < pointe_offset + i; k++)
+		{
+			decoString += decos[Math.floor(Math.random() * (max - min) + min)]
+		}
+		decoString += '|'
+		for (let j = 0; j < pointe_offset + i; j++)
+		{
+			decoString += decos[Math.floor(Math.random() * (max - min) + min)]
+		}
+		console.log(' '.repeat(espacement - i + 2 + (etages - 4)) + '/' + decoString + "\\");
 	}
 }
 
@@ -52,10 +108,28 @@ const afficherEtage = (hauteur, pointe_offset, espacement) => {
 // afficherEtage(3, 3, 0);
 
 const afficherSapin = (etages, hauteur_etage) => {
-	afficherPointeSapin(hauteur_etage, hauteur_etage);
-	for (let i = 1; i < etages; i++) {
-		afficherEtage(hauteur_etage, i, hauteur_etage - i);
+	if (etages > 4)
+	{
+		afficherPointeSapinPlusQuatreEtages(hauteur_etage, hauteur_etage, etages);
+		for (let i = 1; i < etages; i++) {
+			afficherPlusDeQuatreEtage(hauteur_etage, i, hauteur_etage - i, etages);
+		}
+		for (let j = 0; j < 3; j++)
+		{
+			console.log(" ".repeat(hauteur_etage + 2 + (etages - 4)) + '#'.repeat(3));
+		}
+	}
+	else
+	{
+		afficherPointeSapin(hauteur_etage, hauteur_etage);
+		for (let i = 1; i < etages; i++) {
+			afficherEtage(hauteur_etage, i, hauteur_etage - i);
+		}
+		for (let j = 0; j < 3; j++)
+		{
+			console.log(" ".repeat(hauteur_etage + 2) + '#'.repeat(3));
+		}
 	}
 }
 
-afficherSapin(3, 3);
+afficherSapin(5, 5);
